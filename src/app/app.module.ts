@@ -7,13 +7,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SelectedUserComponent } from './selected-user/selected-user.component';
 import { UserService } from './user.service';
+import { MessageComponent } from './message/message.component';
+import { MessageService } from './message.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SelectedUserComponent
+    SelectedUserComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import { UserService } from './user.service';
     FormsModule
   ],
   providers: [
-    UserService
+    UserService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
