@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SelectedUserComponent } from './selected-user/selected-user.component';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { SelectedUserComponent } from './selected-user/selected-user.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user'
-import { USER } from '../mock-users'
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +9,21 @@ import { USER } from '../mock-users'
 })
 export class LoginComponent implements OnInit {
   
-  users = USER;
+  users: User[];
   selectedUser: User;
 
   selectUser(user): void {
     this.selectedUser = user;
   }
 
+  getUsers(): void{
+    this.userService.getUsers().subscribe(users => this.users = users);
+  }
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.getUsers();
   }
 
 }
