@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   getUsers(): void{
     this.userService.getUsers().subscribe(users => this.users = users);
-  }
+  } 
 
   constructor(private userService: UserService) { }
 
