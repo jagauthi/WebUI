@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user'
+import { USER } from '../mock-users'
 
 @Component({
   selector: 'app-login',
@@ -7,11 +8,14 @@ import { User } from '../user'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
+  users = USER;
+  selectedUser: User;
 
-  user: User = {
-    username: 'Joseph',
-    password: 'asdf'
-  };
+  selectUser(user): void {
+    this.selectedUser = user;
+  }
+
 
   constructor() { }
 

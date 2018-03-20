@@ -1,9 +1,14 @@
 
 <div>
-  <label>name:
-    <input [(ngModel)]="user.username" placeholder="Username">
-  </label>
-  <label>Pass:
-    <input [(ngModel)]="user.password" placeholder="Password">
-  </label>
+  
+  <h2>
+    <ul class="users">
+      <li *ngFor="let user of users" 
+        (click)="selectUser(user)"
+        [class.selected]="user === selectedUser">
+        <p class="badge">ID: {{user.username}}</p>Pass: {{user.password}}
+      </li>
+    </ul>
+  </h2>
+  <app-selected-user [selectedUser]="selectedUser"></app-selected-user>
 </div>
