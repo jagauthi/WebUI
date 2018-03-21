@@ -16,8 +16,9 @@
     <ul class="users">
       <li *ngFor="let user of users" >
         <a routerLink="/selected/{{user.username}}">
-          <span class="badge">{{user.username}}</span> {{user.password}}
+          <span class="badge">{{user.username}}</span> {{user.password}} 
         </a>
+        <button class="delete" title="delete user" (click)="delete(user)">x</button>
       </li>
     </ul>
   </h2>

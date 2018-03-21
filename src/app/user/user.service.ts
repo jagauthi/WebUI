@@ -15,6 +15,7 @@ export class UserService {
   private getUserUrl= "http://localhost:8080/getAccount?username=";
   private updateUserUrl= "http://localhost:8080/updateAccount";
   private addUserUrl = 'http://localhost:8080/addAccount'
+  private deleteUserUrl = 'http://localhost:8080/deleteAccount?username='
 
   private httpOptions = {
     headers: new HttpHeaders(
@@ -52,6 +53,14 @@ export class UserService {
     return this.http.post<number>(this.addUserUrl, user, this.httpOptions).pipe(
       tap(() => this.log(`Added user: ` + user.username)),
       catchError(this.handleError<number>('addUser'))
+    );
+  }
+
+  deleteUser (user: User): Observable<number> {
+    const url = this.deleteUserUrl + user.username;
+    return this.http.get<number>(url).pipe(
+      tap(() => this.log(`Deleted user name=${user.username}`)),
+      catchError(this.handleError<number>(`deleteUser name=${user.username}`))
     );
   }
 

@@ -30,6 +30,12 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  delete(user: User): void {
+    this.userService.deleteUser(user).subscribe(
+      () => {this.users = this.users.filter(u => u !== user);}
+    );
+  }
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
