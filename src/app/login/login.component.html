@@ -1,6 +1,17 @@
 
 <div>
-  
+  <h1>Users:</h1>
+
+  <div>
+    <label>User name:
+      <input #userName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(userName.value); userName.value=''">
+      add
+    </button>
+  </div>
+
   <h2>
     <ul class="users">
       <li *ngFor="let user of users" >
@@ -10,4 +21,5 @@
       </li>
     </ul>
   </h2>
+  
 </div>

@@ -13,6 +13,14 @@ export class UserService {
 
   private usersUrl = "http://localhost:8080/getAccounts";
   private getUserUrl= "http://localhost:8080/getAccount?username=";
+  private updateUserUrl= "http://localhost:8080/updateAccount";
+  private addUserUrl = 'http://localhost:8080/addAccount'
+
+  private httpOptions = {
+    headers: new HttpHeaders(
+      { 'Content-Type': 'application/json' }
+    )
+  };
 
   getUsers(): Observable<User[]> {
     this.log(`Fetching users`);
@@ -33,6 +41,20 @@ export class UserService {
     );
   }
 
+  updateUser(user: User): Observable<User> {
+    return this.http.put(this.updateUserUrl, user, this.httpOptions).pipe(
+      tap(_ => this.log(`updated user name=${user.userId}`)),
+      catchError(this.handleError<any>('updateUser'))
+    );
+  }
+
+  addUser (user: User): Observable<number> {
+    return this.http.post<number>(this.addUserUrl, user, this.httpOptions).pipe(
+      tap(() => this.log(`Added user: ` + user.username)),
+      catchError(this.handleError<number>('addUser'))
+    );
+  }
+
   log(message: string): void {
     this.messageService.add('UserService: ' + message);
   }
@@ -44,10 +66,8 @@ export class UserService {
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
       // TODO: Better error logging
       console.error(error);
-  
       this.log(`${operation} failed: ${error.message}`);
   
       return of(result as T);

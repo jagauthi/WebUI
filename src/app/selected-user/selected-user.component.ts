@@ -30,6 +30,11 @@ export class SelectedUserComponent implements OnInit {
       .subscribe(user => this.selectedUser = user);
   }
 
+  save(): void {
+    this.userService.updateUser(this.selectedUser)
+      .subscribe(() => this.goBack());
+  }
+
   goBack(): void {
     this.location.back();
   }

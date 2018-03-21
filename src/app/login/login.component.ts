@@ -20,6 +20,16 @@ export class LoginComponent implements OnInit {
     this.userService.getUsers().subscribe(users => this.users = users);
   }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    const input = { userId: 1, username: name, password: 'asdf', email:'asdf' } as User;
+    this.userService.addUser(input)
+      .subscribe(message => {
+        this.users.push(input);
+      });
+  }
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
