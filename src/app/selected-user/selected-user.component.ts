@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../user'
+import { ActivatedRoute } from '@angular/router'
+import { Location } from '@angular/common'
+
+import { UserService } from '../user/user.service'
+import { User } from '../user/user'
 
 @Component({
   selector: 'app-selected-user',
@@ -10,9 +14,23 @@ export class SelectedUserComponent implements OnInit {
 
   @Input() selectedUser: User;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+    this.getUsers();
+  } 
+
+  getUsers(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.userService.getHero(id)
+      .subscribe(user => this.selectedUser = user);
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 }

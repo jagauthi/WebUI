@@ -3,12 +3,11 @@
   
   <h2>
     <ul class="users">
-      <li *ngFor="let user of users" 
-        (click)="selectUser(user)"
-        [class.selected]="user === selectedUser">
-        <p class="badge">ID: {{user.username}}</p>Pass: {{user.password}}
+      <li *ngFor="let user of users" >
+        <a routerLink="/selected/{{user.id}}">
+          <span class="badge">{{user.username}}</span> {{user.password}}
+        </a>
       </li>
     </ul>
   </h2>
-  <app-selected-user [selectedUser]="selectedUser"></app-selected-user>
 </div>
