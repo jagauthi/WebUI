@@ -8,7 +8,7 @@ import { SelectedUserComponent } from './selected-user/selected-user.component'
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'selected/:name', component: SelectedUserComponent },
+  { path: 'selected/:username', component: SelectedUserComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 

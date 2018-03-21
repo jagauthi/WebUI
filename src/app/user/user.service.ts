@@ -12,7 +12,7 @@ import { MessageService } from '../message.service'
 export class UserService {
 
   private usersUrl = "http://localhost:8080/getAccounts";
-  private getUserUrl= "http://localhost:8080/getAccount?user=";
+  private getUserUrl= "http://localhost:8080/getAccount?username=";
 
   getUsers(): Observable<User[]> {
     this.log(`Fetching users`);
@@ -29,7 +29,7 @@ export class UserService {
     const url = `${this.getUserUrl}${name}`;
     return this.http.get<User>(url).pipe(
       tap(_ => this.log(`Fetched user name=${name}`)),
-      catchError(this.handleError<User>(`getHero name=${name}`))
+      catchError(this.handleError<User>(`getUser name=${name}`))
     );
   }
 

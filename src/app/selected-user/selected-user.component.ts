@@ -25,7 +25,7 @@ export class SelectedUserComponent implements OnInit {
   } 
 
   getUsers(): void {
-    const name = this.route.snapshot.paramMap.get('name');
+    const name = this.route.snapshot.paramMap.get('username');
     this.userService.getUser(name)
       .subscribe(user => this.selectedUser = user);
   }
