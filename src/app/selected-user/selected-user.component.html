@@ -1,9 +1,9 @@
 <div *ngIf="selectedUser">
-  <h2>{{ selectedUser.name }} Details</h2>
-  <div><span>Username: </span>{{selectedUser.username}}</div>
+  <h2>{{ selectedUser.user }} Details</h2>
+  <div><span>Username: </span>{{selectedUser.user}}</div>
   <div>
     <label>Pass:
-      <input [(ngModel)]="selectedUser.password" placeholder="pass"/>
+      <input [(ngModel)]="selectedUser.pass" placeholder="pass"/>
     </label>
   </div>
   <button (click)="goBack()">go back</button>

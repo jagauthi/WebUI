@@ -4,8 +4,8 @@
   <h2>
     <ul class="users">
       <li *ngFor="let user of users" >
-        <a routerLink="/selected/{{user.id}}">
-          <span class="badge">{{user.username}}</span> {{user.password}}
+        <a routerLink="/selected/{{user.user}}">
+          <span class="badge">{{user.user}}</span> {{user.pass}}
         </a>
       </li>
     </ul>
