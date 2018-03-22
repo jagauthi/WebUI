@@ -12,6 +12,7 @@ import { MessageService } from '../message.service'
 export class UserService {
 
   private usersUrl = "http://localhost:8080/getAccounts";
+  private loginUrl= "http://localhost:8080/login";
   private getUserUrl= "http://localhost:8080/getAccount?username=";
   private updateUserUrl= "http://localhost:8080/updateAccount";
   private addUserUrl = 'http://localhost:8080/addAccount'
@@ -42,6 +43,13 @@ export class UserService {
     );
   }
 
+  login(user: User): Observable<User> {
+    return this.http.post(this.loginUrl, user, this.httpOptions).pipe(
+      tap(data => this.log("Data: " + data['username'])),
+      catchError(this.handleError<any>('login'))
+    );
+  }
+
   updateUser(user: User): Observable<User> {
     return this.http.put(this.updateUserUrl, user, this.httpOptions).pipe(
       tap(_ => this.log(`updated user name=${user.userId}`)),
@@ -49,7 +57,7 @@ export class UserService {
     );
   }
 
-  addUser (user: User): Observable<number> {
+  createAccount (user: User): Observable<number> {
     return this.http.post<number>(this.addUserUrl, user, this.httpOptions).pipe(
       tap(() => this.log(`Added user: ` + user.username)),
       catchError(this.handleError<number>('addUser'))

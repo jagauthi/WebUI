@@ -7,10 +7,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SelectedUserComponent } from './selected-user/selected-user.component';
 import { UserService } from './user/user.service';
-import { MessageComponent } from './message/message.component';
+import { MessageComponent } from './message/message.component'
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     SelectedUserComponent,
     MessageComponent,
-    DashboardComponent
+    DashboardComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,

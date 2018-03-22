@@ -4,12 +4,14 @@ import { Routes, RouterModule } from '@angular/router'
 import { LoginComponent } from './login/login.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { SelectedUserComponent } from './selected-user/selected-user.component'
+import { CreateAccountComponent } from './create-account/create-account.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'selected/:username', component: SelectedUserComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+  { path: 'createAccount', component: CreateAccountComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
