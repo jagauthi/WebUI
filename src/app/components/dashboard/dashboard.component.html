@@ -1,4 +1,9 @@
 <h3>Items</h3>
 <div class="grid grid-pad">
-  Not implemented yet
+  <ul>
+    <li *ngFor="let item of items">
+     {{ item | json }}
+     <button (click)="addToCart(item);">+</button>
+    </li>
+  </ul>
 </div> 

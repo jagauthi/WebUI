@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../user/user';
-import { UserService } from '../../user/user.service';
+import { ItemService } from '../../item/item.service';
+import { Item } from '../../item/item';
  
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +9,21 @@ import { UserService } from '../../user/user.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  users: User[] = [];
+  items: Item[] = [];
  
-  constructor(private userService: UserService) { }
+  constructor(private itemService: ItemService) { }
  
   ngOnInit() {
-    this.getUsers();
+    this.getItems();
   }
  
-  getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users.slice(0, 5));
+  getItems(): void {
+    this.itemService.getItems()
+      .subscribe(items => this.items = items);
+  }
+
+  addToCart(item: Item): void {
+    this.itemService.addToCart(item)
+      .subscribe();
   }
 }

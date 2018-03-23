@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { SelectedUserComponent } from './components/selected-user/selected-user.component';
 import { UserService } from './user/user.service';
+import { ItemService } from './item/item.service';
 import { MessageComponent } from './components/message/message.component'
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
@@ -31,6 +32,7 @@ import { CreateAccountComponent } from './components/create-account/create-accou
   ],
   providers: [
     UserService,
+    ItemService,
     MessageService
   ],
   bootstrap: [AppComponent]
