@@ -1,5 +1,11 @@
 <h3>Items</h3>
 <div class="grid grid-pad">
+  <ul>Cart:
+    <li *ngFor="let item of cart">
+      {{ item | json }}
+      <button (click)="removeFromCart(item);">-</button>
+    </li>
+  </ul>
   <ul>
     <li *ngFor="let item of items">
      {{ item | json }}

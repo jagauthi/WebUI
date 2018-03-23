@@ -11,6 +11,11 @@ import { UserService } from '../../user/user.service';
 })
 export class CreateAccountComponent implements OnInit {
 
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
+
   createAccount(name: string, pass: string, email: string): void {
     name = name.trim();
     pass = pass.trim();
@@ -25,11 +30,6 @@ export class CreateAccountComponent implements OnInit {
   changeRoute(path: string) {
     this.router.navigateByUrl(path);
   }
-
-  constructor(
-    private userService: UserService,
-    private router: Router
-  ) { }
 
   ngOnInit() {
   }

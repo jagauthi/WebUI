@@ -4,7 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { MessageService } from '../message.service'
+import { MessageService } from '../components/message/message.service'
 import { Item } from './item';
 
 @Injectable()
@@ -14,12 +14,20 @@ export class ItemService {
   private getItemUrl = "http://localhost:8080/items/getItem";
   private addItemsUrl = "http://localhost:8080/items/addItems";
   private addToCartUrl = "http://localhost:8080/items/addToCart";
+  private getCartForUserUrl = "http://localhost:8080/items/getCartForUser?username=";
   
   private httpOptions = {
     headers: new HttpHeaders(
       { 'Content-Type': 'application/json' }
     )
   };
+
+  public cart: Item[] = [];
+
+  constructor(
+    private http: HttpClient, 
+    private messageService: MessageService
+  ) { }
 
   getItems(): Observable<Item[]> {
     this.log(`Fetching items`);
@@ -43,35 +51,42 @@ export class ItemService {
   createItem (item: Item): Observable<number> {
     return this.http.post<number>(this.addItemsUrl, item, this.httpOptions).pipe(
       tap(() => this.log(`Added item: ` + item.description)),
-      catchError(this.handleError<number>('addUser'))
+      catchError(this.handleError<number>('createItem'))
     );
   }
 
-  addToCart (item: Item): Observable<number> {
+  addToCart (username: string, item: Item): Observable<number | Item> {
     const input: Object = {
-      user: "test",
+      user: username,
       items: [ item ]
     };
     return this.http.post<number>(this.addToCartUrl, input, this.httpOptions).pipe(
-      tap(() => this.log(`Added item to cart: ` + item.description)),
+      tap(() => {
+        this.log(`Added item to cart: ` + item.description);
+        this.cart.push(item);
+      }),
       catchError(this.handleError<number>('addToCart'))
     );
   }
 
-  log(message: string): void {
-    this.messageService.add('ItemService: ' + message);
+  getCartForUser(user: string): Observable<Item[]> {
+    this.log("Fetching cart for user " + user);
+    return this.http.get<Item[]>(this.getCartForUserUrl + user)
+      .pipe( 
+        tap(() => this.log(`Fetched cart.`)),
+        catchError( this.handleError( 'getCartForUser', [] ) ) 
+      );
   }
 
-  constructor(
-    private http: HttpClient, 
-    private messageService: MessageService
-  ) { }
+  log(message: string): void {
+    this.messageService.add("ItemService: " + message);
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: Better error logging
       console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
+      this.log(operation + " + failed: " + error.message);
   
       return of(result as T);
     };

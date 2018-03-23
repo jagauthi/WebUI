@@ -9,7 +9,7 @@ import { SelectedUserComponent } from './components/selected-user/selected-user.
 import { UserService } from './user/user.service';
 import { ItemService } from './item/item.service';
 import { MessageComponent } from './components/message/message.component'
-import { MessageService } from './message.service';
+import { MessageService } from './components/message/message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';

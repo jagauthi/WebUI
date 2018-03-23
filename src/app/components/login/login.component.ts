@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  getUsers(): void{
-    this.userService.getUsers().subscribe(users => {});
-  }
+  constructor(  
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   login(name: string, pass: string): void {
     name = name.trim();
@@ -40,11 +41,6 @@ export class LoginComponent implements OnInit {
   changeRoute(path: string) {
     this.router.navigateByUrl(path);
   }
-
-  constructor(  
-    private userService: UserService,
-    private router: Router
-  ) { }
 
   ngOnInit() {
     

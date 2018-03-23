@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from './user';
 import { USERS } from './mock-users';
-import { MessageService } from '../message.service'
+import { MessageService } from '../components/message/message.service'
 
 @Injectable()
 export class UserService {
@@ -23,6 +23,18 @@ export class UserService {
       { 'Content-Type': 'application/json' }
     )
   };
+
+  public activeUser = {
+    userId: 0,
+    username: "",
+    password: "",
+    email: ""
+  }
+
+  constructor(
+    private http: HttpClient, 
+    private messageService: MessageService
+  ) { }
 
   getUsers(): Observable<User[]> {
     this.log(`Fetching users`);
@@ -45,7 +57,10 @@ export class UserService {
 
   login(user: User): Observable<User> {
     return this.http.post(this.loginUrl, user, this.httpOptions).pipe(
-      tap(data => this.log("Data: " + data['username'])),
+      tap((data) => {
+        this.log("Data: " + data['username']);
+        this.activeUser = data as User;
+      }),
       catchError(this.handleError<any>('login'))
     );
   }
@@ -59,7 +74,7 @@ export class UserService {
 
   createAccount (user: User): Observable<number> {
     return this.http.post<number>(this.addUserUrl, user, this.httpOptions).pipe(
-      tap(() => this.log(`Added user: ` + user.username)),
+      tap(() => this.log("Added user: " + user.username)),
       catchError(this.handleError<number>('addUser'))
     );
   }
@@ -67,25 +82,20 @@ export class UserService {
   deleteUser (user: User): Observable<number> {
     const url = this.deleteUserUrl + user.username;
     return this.http.get<number>(url).pipe(
-      tap(() => this.log(`Deleted user name=${user.username}`)),
+      tap(() => this.log("Deleted user name " + user.username)),
       catchError(this.handleError<number>(`deleteUser name=${user.username}`))
     );
   }
 
   log(message: string): void {
-    this.messageService.add('UserService: ' + message);
+    this.messageService.add("UserService: " + message);
   }
-
-  constructor(
-    private http: HttpClient, 
-    private messageService: MessageService
-  ) { }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: Better error logging
       console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
+      this.log(operation + " + failed: " + error.message);
   
       return of(result as T);
     };
