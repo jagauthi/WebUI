@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    margin: 0;
+    padding: 0;
+    width:100%;
+    background-color:rgb(78, 243, 255)
+}
+
+button {
+    position: relative;
+    background-color: rgb(0, 0, 255);
+    color: rgb(155, 222, 255);
+    border: none;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+    font-family: Arial;
+    font-size:20px;
+}
+
+button:hover {
+    background-color: #8fdafa;
+    color: rgb(51, 70, 80);
+    outline-color: #AAF;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+button:active {
+    transform: translateY(4px);
+}

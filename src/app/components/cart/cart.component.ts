@@ -44,11 +44,7 @@ export class CartComponent implements OnInit {
     this.itemService.getCartForUser(user)
       .subscribe(
         (response) => {
-          let updatedItems = response;
-          for(let item of updatedItems) {
-            item.imgPath = "assets/" + item.description + ".jpg";
-          }
-          this.cart = updatedItems;
+          this.cart = response;
         });
   }
 
@@ -61,6 +57,18 @@ export class CartComponent implements OnInit {
         }
       }
     );
+  }
+
+  getImgPath(item: Item): string {
+    return "assets/" + item.description + ".jpg";
+  }
+
+  getTotalPrice(): number {
+    let totalPrice = 0.0;
+    for(let item of this.cart) {
+      totalPrice += item.price;
+    }
+    return totalPrice;
   }
 
   goBack(): void {

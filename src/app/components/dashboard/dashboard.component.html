@@ -1,19 +1,13 @@
 
 <div>
-  <button (click)="goToCart()">Cart ({{cart.length}})</button>
-<!--
-  <ul>Items:
-    <li *ngFor="let item of items">
-      {{ item | json }}
-      <button (click)="addToCart(item);">-</button>
-    </li>
-  </ul>-->
-  <h3>Items</h3>
+  <button class="cart" (click)="goToCart()">Cart ({{cart.length}})</button>
+  <h1>{{user.username}}'s Dashboard</h1>
+  <h3>Item Catalog:</h3>
   <div class="main">
     <div *ngFor="let item of catalog" class="container">
       <div class="thumbnail">
         <!-- <img src="assets/Pants1.jpg" (click)="addToCart(item);" > -->
-        <img src="{{item.imgPath}}" (click)="addToCart(item);">
+        <img src="{{getImgPath(item)}}" (click)="addToCart(item);">
         <p class="title">{{ item.description }}</p> 
         <p class="price">{{ item.price | currency }}</p> 
       </div>

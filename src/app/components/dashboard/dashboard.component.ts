@@ -9,7 +9,7 @@ import { UserService } from '../../user/user.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: [ './test.css' ]
+  styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
   catalog: Item[] = [];
@@ -36,11 +36,7 @@ export class DashboardComponent implements OnInit {
   getItems(): void {
     this.itemService.getItems()
       .subscribe(items => {
-        let updatedItems = items;
-        for(let item of updatedItems) {
-          item.imgPath = "assets/" + item.description + ".jpg";
-        }
-        this.catalog = updatedItems;
+        this.catalog = items;
       });
   }
  
@@ -77,6 +73,10 @@ export class DashboardComponent implements OnInit {
         }
       }
     );
+  }
+
+  getImgPath(item: Item): string {
+    return "assets/" + item.description + ".jpg";
   }
 
   goToCart(): void {
