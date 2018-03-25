@@ -28,17 +28,12 @@ export class CartComponent implements OnInit {
 
   ngOnInit() { 
     this.user = this.userService.activeUser;
+    this.cart = this.itemService.cart;
     if(this.user.username === "") {
       this.changeRoute("login");
     }
     this.getCart(this.user.username);
   } 
-
-  getUser(): void {
-    const name = this.route.snapshot.paramMap.get('username');
-    this.userService.getUser(name)
-      .subscribe(user => this.user = user);
-  }
 
   getCart(user: string): void {
     this.itemService.getCartForUser(user)

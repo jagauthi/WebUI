@@ -74,7 +74,10 @@ export class ItemService {
     this.log("Fetching cart for user " + user);
     return this.http.get<Item[]>(this.getCartForUserUrl + user)
       .pipe( 
-        tap(() => this.log(`Fetched cart.`)),
+        tap((response) => {
+          this.log(`Fetched cart.`);
+          this.cart = response;
+        }),
         catchError( this.handleError( 'getCartForUser', [] ) ) 
       );
   }
