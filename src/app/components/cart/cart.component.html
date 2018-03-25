@@ -1,0 +1,8 @@
+<h3>Cart: </h3>
+  <ul>
+    <li *ngFor="let item of cart">
+      {{ item | json }}
+      <button (click)="removeFromCart(item);">-</button>
+    </li>
+  </ul>
+  <button (click)="goBack()">Back</button>

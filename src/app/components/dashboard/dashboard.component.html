@@ -1,12 +1,6 @@
 
 <div>
-  <h3>Cart: </h3>
-  <ul>
-    <li *ngFor="let item of cart">
-      {{ item | json }}
-      <button (click)="removeFromCart(item);">-</button>
-    </li>
-  </ul>
+  <button (click)="goToCart()">Cart ({{cart.length}})</button>
 <!--
   <ul>Items:
     <li *ngFor="let item of items">
@@ -16,9 +10,9 @@
   </ul>-->
   <h3>Items</h3>
   <div class="main">
-    <div *ngFor="let item of cart" class="container">
+    <div *ngFor="let item of catalog" class="container">
       <div class="thumbnail">
-        <img src="assets/Pants1.jpg">
+        <img src="assets/Pants1.jpg" (click)="addToCart(item);" >
         <p class="title">{{ item.description }}</p> 
         <p class="price">{{ item.price | currency }}</p> 
       </div>

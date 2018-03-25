@@ -13,6 +13,7 @@ import { MessageService } from './components/message/message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CreateAccountComponent } from './components/create-account/create-accou
     SelectedUserComponent,
     MessageComponent,
     DashboardComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

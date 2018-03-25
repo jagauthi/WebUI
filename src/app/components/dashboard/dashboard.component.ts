@@ -12,7 +12,7 @@ import { UserService } from '../../user/user.service';
   styleUrls: [ './test.css' ]
 })
 export class DashboardComponent implements OnInit {
-  items: Item[] = [];
+  catalog: Item[] = [];
   cart: Item[] = [];
 
   System: any;    
@@ -32,14 +32,10 @@ export class DashboardComponent implements OnInit {
     this.getItems();
     this.getCart(this.user.username);
   }
-
-  test(): void {
-    
-  }
  
   getItems(): void {
     this.itemService.getItems()
-      .subscribe(items => this.items = items);
+      .subscribe(items => this.catalog = items);
   }
  
   getCart(user: string): void {
@@ -75,6 +71,10 @@ export class DashboardComponent implements OnInit {
         }
       }
     );
+  }
+
+  goToCart(): void {
+    this.changeRoute("cart/" + this.user.username);
   }
 
   changeRoute(path: string) {
