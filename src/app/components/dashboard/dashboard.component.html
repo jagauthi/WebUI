@@ -1,15 +1,27 @@
-<h3>Items</h3>
-<div class="grid grid-pad">
-  <ul>Cart:
+
+<div>
+  <h3>Cart: </h3>
+  <ul>
     <li *ngFor="let item of cart">
       {{ item | json }}
       <button (click)="removeFromCart(item);">-</button>
     </li>
   </ul>
-  <ul>
+<!--
+  <ul>Items:
     <li *ngFor="let item of items">
-     {{ item | json }}
-     <button (click)="addToCart(item);">+</button>
+      {{ item | json }}
+      <button (click)="addToCart(item);">-</button>
     </li>
-  </ul>
+  </ul>-->
+  <h3>Items</h3>
+  <div class="main">
+    <div *ngFor="let item of cart" class="container">
+      <div class="thumbnail">
+        <img src="assets/Pants1.jpg">
+        <p class="title">{{ item.description }}</p> 
+        <p class="price">{{ item.price | currency }}</p> 
+      </div>
+    </div>
+  </div> 
 </div> 

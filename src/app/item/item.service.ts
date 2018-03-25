@@ -14,6 +14,7 @@ export class ItemService {
   private getItemUrl = "http://localhost:8080/items/getItem";
   private addItemsUrl = "http://localhost:8080/items/addItems";
   private addToCartUrl = "http://localhost:8080/items/addToCart";
+  private removeFromCartUrl = "http://localhost:8080/items/removeFromCart";
   private getCartForUserUrl = "http://localhost:8080/items/getCartForUser?username=";
   
   private httpOptions = {
@@ -76,6 +77,19 @@ export class ItemService {
         tap(() => this.log(`Fetched cart.`)),
         catchError( this.handleError( 'getCartForUser', [] ) ) 
       );
+  }
+
+  removeFromCart (username: string, item: Item): Observable<Item[]> {
+    const input: Object = {
+      user: username,
+      items: [ item ]
+    };
+    return this.http.post<Item[]>(this.removeFromCartUrl, input, this.httpOptions).pipe(
+      tap(() => {
+        this.log(`Removed item from cart: ` + item.description);
+      }),
+      catchError(this.handleError<Item[]>('removeFromCart'))
+    );
   }
 
   log(message: string): void {

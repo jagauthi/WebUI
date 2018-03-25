@@ -9,12 +9,13 @@ import { UserService } from '../../user/user.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.css' ]
+  styleUrls: [ './test.css' ]
 })
 export class DashboardComponent implements OnInit {
   items: Item[] = [];
   cart: Item[] = [];
 
+  System: any;    
   user: User;
  
   constructor(
@@ -30,6 +31,10 @@ export class DashboardComponent implements OnInit {
     }
     this.getItems();
     this.getCart(this.user.username);
+  }
+
+  test(): void {
+    
   }
  
   getItems(): void {
@@ -56,6 +61,17 @@ export class DashboardComponent implements OnInit {
           else {
             this.cart.push(item);
           }
+        }
+      }
+    );
+  }
+
+  removeFromCart(item: Item): void {
+    this.itemService.removeFromCart(this.user.username, item)
+    .subscribe(
+      (response) => {
+        if(response.length === 0 || response[0].itemNumber != 0) {
+          this.cart = response;
         }
       }
     );
