@@ -23,7 +23,8 @@ export class ItemService {
     )
   };
 
-  public cart: Item[] = [];
+  public catalog: Item[];
+  public cart: Item[];
 
   constructor(
     private http: HttpClient, 
@@ -34,7 +35,10 @@ export class ItemService {
     this.log(`Fetching items`);
     return this.http.get<Item[]>(this.getItemsUrl)
       .pipe( 
-        tap(items => this.log(`Fetched.`)),
+        tap(items => {
+          this.log(`Fetched.`);
+          this.catalog = items;
+        }),
         catchError( this.handleError( 'getItems', [] ) ) 
       );
   }
@@ -64,7 +68,6 @@ export class ItemService {
     return this.http.post<number>(this.addToCartUrl, input, this.httpOptions).pipe(
       tap(() => {
         this.log(`Added item to cart: ` + item.description);
-        this.cart.push(item);
       }),
       catchError(this.handleError<number>('addToCart'))
     );
@@ -88,8 +91,9 @@ export class ItemService {
       items: [ item ]
     };
     return this.http.post<Item[]>(this.removeFromCartUrl, input, this.httpOptions).pipe(
-      tap(() => {
+      tap((response) => {
         this.log(`Removed item from cart: ` + item.description);
+        this.cart = response;
       }),
       catchError(this.handleError<Item[]>('removeFromCart'))
     );

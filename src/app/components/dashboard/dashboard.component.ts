@@ -12,10 +12,8 @@ import { UserService } from '../../user/user.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  catalog: Item[] = [];
-  cart: Item[] = [];
-
-  System: any;    
+  catalog: Item[];
+  cart: Item[];  
   user: User;
  
   constructor(
@@ -26,11 +24,17 @@ export class DashboardComponent implements OnInit {
  
   ngOnInit() {
     this.user = this.userService.activeUser;
+    this.catalog = this.itemService.catalog;
+    this.cart = this.itemService.cart;
     if(this.user.username === "") {
       this.changeRoute("login");
     }
-    this.getItems();
-    this.getCart(this.user.username);
+    if(this.catalog === undefined) {
+      this.getItems();
+    }
+    if(this.cart === undefined) {
+      this.getCart(this.user.username);
+    }
   }
  
   getItems(): void {

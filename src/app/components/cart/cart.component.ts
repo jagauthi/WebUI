@@ -16,7 +16,7 @@ export class CartComponent implements OnInit {
 
   @Input() user: User;
 
-  cart: Item[] = [];
+  cart: Item[];
  
   constructor(
     private route: ActivatedRoute,
@@ -29,11 +29,25 @@ export class CartComponent implements OnInit {
   ngOnInit() { 
     this.user = this.userService.activeUser;
     this.cart = this.itemService.cart;
+    this.cart.sort(this.cartSort);
     if(this.user.username === "") {
       this.changeRoute("login");
     }
-    this.getCart(this.user.username);
+    if(this.cart === undefined) {
+      this.getCart(this.user.username);
+    }
   } 
+
+  cartSort(item1: Item, item2: Item): number { 
+    if(item1.itemNumber > item2.itemNumber)
+      return 1;
+    else if (item1.itemNumber < item2.itemNumber) {
+      return -1;
+    }
+    else {
+      return 0;
+    }
+  }
 
   getCart(user: string): void {
     this.itemService.getCartForUser(user)
