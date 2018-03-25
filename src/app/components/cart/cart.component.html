@@ -1,8 +1,18 @@
 <h3>Cart: </h3>
-  <ul>
-    <li *ngFor="let item of cart">
-      {{ item | json }}
-      <button (click)="removeFromCart(item);">-</button>
-    </li>
-  </ul>
   <button (click)="goBack()">Back</button>
+  <table>
+      <tr>
+        <th>ItemDescription</th>
+        <th>Quantity</th> 
+        <th>Price</th>
+      </tr>
+      <tr *ngFor="let item of cart">
+        <td>
+          {{ item.description }}
+          <img src="{{item.imgPath}}">
+        </td>
+        <td>x{{ 1 }}</td>
+        <td>{{ item.price }}</td>
+        <button (click)="removeFromCart(item);">-</button>
+      </tr>
+    </table>

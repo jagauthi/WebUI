@@ -35,7 +35,13 @@ export class DashboardComponent implements OnInit {
  
   getItems(): void {
     this.itemService.getItems()
-      .subscribe(items => this.catalog = items);
+      .subscribe(items => {
+        let updatedItems = items;
+        for(let item of updatedItems) {
+          item.imgPath = "assets/" + item.description + ".jpg";
+        }
+        this.catalog = updatedItems;
+      });
   }
  
   getCart(user: string): void {

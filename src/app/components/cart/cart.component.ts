@@ -44,7 +44,11 @@ export class CartComponent implements OnInit {
     this.itemService.getCartForUser(user)
       .subscribe(
         (response) => {
-          this.cart = response;
+          let updatedItems = response;
+          for(let item of updatedItems) {
+            item.imgPath = "assets/" + item.description + ".jpg";
+          }
+          this.cart = updatedItems;
         });
   }
 
