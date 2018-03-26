@@ -1,8 +1,19 @@
 
 <div>
-  <button class="cart" (click)="goToCart()">Cart ({{cart.length}})</button>
-  <h1>{{user.username}}'s Dashboard</h1>
-  <h3>Item Catalog:</h3>
+  <div class="intro">
+    <button class="back">Back to login</button>
+    <select class="account" name="Filter">
+      <option (click)="filterCategory">Account settings</option>
+      <option (click)="filterSomething">Logout</option>
+    </select>  
+    <button class="cart" (click)="goToCart()">Cart ({{cart.length}})</button>
+    <h1 class="pageTitle">{{user.username}}'s Dashboard</h1>
+    <h3>Item Catalog:</h3>
+    <select class="filter" name="Filter">
+      <option (click)="filterCategory">Category</option>
+      <option (click)="filterSomething">Something</option>
+    </select>   
+  </div>
   <div class="main">
     <div *ngFor="let item of catalog" class="container">
       <div class="thumbnail">

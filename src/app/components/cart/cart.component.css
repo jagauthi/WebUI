@@ -1,6 +1,6 @@
 table {
     border-style:solid;
-    width: 90%;
+    width:100%;
 }
 th, td {
     padding: 15px;
@@ -29,4 +29,22 @@ tr:nth-child(odd) {
 tr:last-child { 
     background:#525252;
     color: white;
+}
+
+button.back { 
+    margin: 0px;
+}
+
+button.checkout { 
+    padding:20px;
+    font-size:30px;
+    background:#00ff00;
+    color: white;
+    border: 1px solid rgb(0, 0, 0);
+    float:right;
+}
+
+div {
+    width: 90%;
+    margin:auto;
 }
