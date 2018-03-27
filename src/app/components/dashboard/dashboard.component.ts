@@ -62,21 +62,41 @@ export class DashboardComponent implements OnInit {
 
           }
           else {
-            this.cart.push(
-              {
-                item: {
-                  itemNumber:item.itemNumber,
-                  price: item.price,
-                  description: item.description,
-                  category: item.category
-                },
-                quantity: quantity
-              } as CartItem
-            );
+            this.localCartAdd(item, quantity);
           }
         }
       }
     );
+  }
+
+  localCartAdd(item: Item, quantity: number): void {
+    let cartItem = this.cartContains(item);
+    if(cartItem !== null ) {
+      cartItem.quantity += quantity;
+    }
+    else {
+      this.cart.push(
+        {
+          item: {
+            itemNumber:item.itemNumber,
+            cost: item.cost,
+            price: item.price,
+            description: item.description,
+            category: item.category
+          },
+          quantity: quantity
+        } as CartItem
+      );
+    }
+  }
+
+  cartContains(item: Item):CartItem {
+    for(let cartItem of this.cart ) {
+      if(cartItem.item.itemNumber === item.itemNumber) {
+        return cartItem;
+      }
+    }
+    return null;
   }
 
   getImgPath(item: Item): string {

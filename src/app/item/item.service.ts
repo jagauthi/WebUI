@@ -68,10 +68,10 @@ export class ItemService {
       cart: [ {
           item: {
             itemNumber:item.itemNumber,
-            cost:0,
-            price:0,
-            description:"",
-            category:""
+            cost:item.cost,
+            price:item.price,
+            description:item.description,
+            category:item.category
           },
           quantity: quantity
         } ]
@@ -103,10 +103,10 @@ export class ItemService {
       cart: [ {
           item: {
             itemNumber:item.itemNumber,
-            cost:0,
-            price:0,
-            description:"",
-            category:""
+            cost:item.cost,
+            price:item.price,
+            description:item.description,
+            category:item.category
           },
           quantity: quantity
         } ]

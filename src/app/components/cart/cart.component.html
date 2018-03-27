@@ -12,7 +12,7 @@
   </tr>
   <tr *ngFor="let item of cart">
     <td>
-      {{ item.description }}
+      {{ item.item.description }}
       <img width="100" height="100  " src="{{getImgPath(item.item)}}">
     </td>
     <td>x{{ item.quantity }}</td>
