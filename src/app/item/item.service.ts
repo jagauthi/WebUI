@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from '../components/message/message.service'
 import { Item } from './item';
+import { CartItem } from './cartItem';
 
 @Injectable()
 export class ItemService {
@@ -24,7 +25,7 @@ export class ItemService {
   };
 
   public catalog: Item[];
-  public cart: Item[];
+  public cart: CartItem[];
 
   constructor(
     private http: HttpClient, 
@@ -60,10 +61,20 @@ export class ItemService {
     );
   }
 
-  addToCart (username: string, item: Item): Observable<number | Item> {
-    const input: Object = {
-      user: username,
-      items: [ item ]
+  addToCart (username: string, item: Item, quantity: number): Observable<number | Item> {
+    const input: Object = 
+    {
+      username: username,
+      cart: [ {
+          item: {
+            itemNumber:item.itemNumber,
+            cost:0,
+            price:0,
+            description:"",
+            category:""
+          },
+          quantity: quantity
+        } ]
     };
     return this.http.post<number>(this.addToCartUrl, input, this.httpOptions).pipe(
       tap(() => {
@@ -73,9 +84,9 @@ export class ItemService {
     );
   }
 
-  getCartForUser(user: string): Observable<Item[]> {
+  getCartForUser(user: string): Observable<CartItem[]> {
     this.log("Fetching cart for user " + user);
-    return this.http.get<Item[]>(this.getCartForUserUrl + user)
+    return this.http.get<CartItem[]>(this.getCartForUserUrl + user)
       .pipe( 
         tap((response) => {
           this.log(`Fetched cart.`);
@@ -85,17 +96,27 @@ export class ItemService {
       );
   }
 
-  removeFromCart (username: string, item: Item): Observable<Item[]> {
-    const input: Object = {
-      user: username,
-      items: [ item ]
+  removeFromCart (username: string, item: Item, quantity: number): Observable<CartItem[]> {
+    const input: Object = 
+    {
+      username: username,
+      cart: [ {
+          item: {
+            itemNumber:item.itemNumber,
+            cost:0,
+            price:0,
+            description:"",
+            category:""
+          },
+          quantity: quantity
+        } ]
     };
-    return this.http.post<Item[]>(this.removeFromCartUrl, input, this.httpOptions).pipe(
+    return this.http.post<CartItem[]>(this.removeFromCartUrl, input, this.httpOptions).pipe(
       tap((response) => {
         this.log(`Removed item from cart: ` + item.description);
         this.cart = response;
       }),
-      catchError(this.handleError<Item[]>('removeFromCart'))
+      catchError(this.handleError<CartItem[]>('removeFromCart'))
     );
   }
 

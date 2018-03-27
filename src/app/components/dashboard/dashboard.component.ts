@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from '../../user/user';
 import { ItemService } from '../../item/item.service';
 import { Item } from '../../item/item';
+import { CartItem } from '../../item/cartItem';
 import { UserService } from '../../user/user.service';
  
 @Component({
@@ -13,7 +14,7 @@ import { UserService } from '../../user/user.service';
 })
 export class DashboardComponent implements OnInit {
   catalog: Item[];
-  cart: Item[];  
+  cart: CartItem[];  
   user: User;
  
   constructor(
@@ -52,8 +53,8 @@ export class DashboardComponent implements OnInit {
         });
   }
 
-  addToCart(item: Item): void {
-    this.itemService.addToCart(this.user.username, item)
+  addToCart(item: Item, quantity: number): void {
+    this.itemService.addToCart(this.user.username, item, quantity)
     .subscribe(
       (response) => {
         if(typeof(response) === "number") {
@@ -61,19 +62,18 @@ export class DashboardComponent implements OnInit {
 
           }
           else {
-            this.cart.push(item);
+            this.cart.push(
+              {
+                item: {
+                  itemNumber:item.itemNumber,
+                  price: item.price,
+                  description: item.description,
+                  category: item.category
+                },
+                quantity: quantity
+              } as CartItem
+            );
           }
-        }
-      }
-    );
-  }
-
-  removeFromCart(item: Item): void {
-    this.itemService.removeFromCart(this.user.username, item)
-    .subscribe(
-      (response) => {
-        if(response.length === 0 || response[0].itemNumber != 0) {
-          this.cart = response;
         }
       }
     );

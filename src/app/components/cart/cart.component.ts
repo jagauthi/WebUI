@@ -5,6 +5,7 @@ import { Location } from '@angular/common'
 import { UserService } from '../../user/user.service'
 import { ItemService } from '../../item/item.service'
 import { Item } from '../../item/item'
+import { CartItem } from '../../item/cartItem'
 import { User } from '../../user/user'
 
 @Component({
@@ -16,7 +17,7 @@ export class CartComponent implements OnInit {
 
   @Input() user: User;
 
-  cart: Item[];
+  cart: CartItem[];
  
   constructor(
     private route: ActivatedRoute,
@@ -38,10 +39,10 @@ export class CartComponent implements OnInit {
     }
   } 
 
-  cartSort(item1: Item, item2: Item): number { 
-    if(item1.itemNumber > item2.itemNumber)
+  cartSort(item1: CartItem, item2: CartItem): number { 
+    if(item1.item.itemNumber > item2.item.itemNumber)
       return 1;
-    else if (item1.itemNumber < item2.itemNumber) {
+    else if (item1.item.itemNumber < item2.item.itemNumber) {
       return -1;
     }
     else {
@@ -57,12 +58,38 @@ export class CartComponent implements OnInit {
         });
   }
 
-  removeFromCart(item: Item): void {
-    this.itemService.removeFromCart(this.user.username, item)
+  removeFromCart(item: Item, quantity: number): void {
+    this.itemService.removeFromCart(this.user.username, item, quantity)
     .subscribe(
       (response) => {
-        if(response.length === 0 || response[0].itemNumber != 0) {
+        if(response.length === 0 || response[0].item.itemNumber != 0) {
           this.cart = response;
+        }
+      }
+    );
+  }
+
+  increaseQuantity(item: Item, quantity: number): void {
+    this.itemService.addToCart(this.user.username, item, quantity)
+    .subscribe(
+      (response) => {
+        if(typeof(response) === "number") {
+          if(response === 0) {
+
+          }
+          else {
+            this.cart.push(
+              {
+                item: {
+                  itemNumber:item.itemNumber,
+                  price: item.price,
+                  description: item.description,
+                  category: item.category
+                },
+                quantity: quantity
+              } as CartItem
+            );
+          }
         }
       }
     );
@@ -75,7 +102,7 @@ export class CartComponent implements OnInit {
   getTotalPrice(): number {
     let totalPrice = 0.0;
     for(let item of this.cart) {
-      totalPrice += item.price;
+      totalPrice += item.item.price;
     }
     return totalPrice;
   }

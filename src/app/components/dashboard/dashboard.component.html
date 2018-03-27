@@ -17,8 +17,7 @@
   <div class="main">
     <div *ngFor="let item of catalog" class="container">
       <div class="thumbnail">
-        <!-- <img src="assets/Pants1.jpg" (click)="addToCart(item);" > -->
-        <img src="{{getImgPath(item)}}" (click)="addToCart(item);">
+        <img src="{{getImgPath(item)}}" (click)="addToCart(item, 1);">
         <p class="title">{{ item.description }}</p> 
         <p class="price">{{ item.price | currency }}</p> 
       </div>
