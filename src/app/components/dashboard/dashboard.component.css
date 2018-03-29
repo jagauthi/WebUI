@@ -1,6 +1,6 @@
 
 .main {
-  background-color: #3CBC8D ;
+  background-color: #3CBC8D;
   border:solid black;
   padding: 40px 0;
   width: 90%;
@@ -19,6 +19,10 @@
   text-align:center;
   font-size:40px;
   text-underline-position: below
+}
+
+h1, h3 k, {
+  color: white;
 }
 
 img {
@@ -70,18 +74,9 @@ button.cart {
   padding: 20px;
   font-size:20px;
   border-style:solid;
-  background-color: rgb(141, 255, 88);
-  color: rgb(51, 70, 80);
+  background-color: #3CBC8D;
+  color: white;
   float:right;  
-}
-
-button.back {
-  padding: 10px;
-  font-size:15px;
-  border-style:solid;
-  background-color: rgb(255, 197, 88);
-  color: rgb(51, 70, 80);
-  float:left;  
 }
 
 button:hover {
@@ -103,6 +98,7 @@ select.filter option {
 } 
 
 .account {
+  background: #a74fff;
   display:block;
   margin-right: 0 !important;
   margin-left:auto;

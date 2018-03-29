@@ -120,6 +120,11 @@ export class ItemService {
     );
   }
 
+  resetUser(): void {
+    this.catalog = undefined;
+    this.cart = undefined;
+  }
+
   log(message: string): void {
     this.messageService.add("ItemService: " + message);
   }

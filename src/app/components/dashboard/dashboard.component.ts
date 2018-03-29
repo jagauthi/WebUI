@@ -107,6 +107,30 @@ export class DashboardComponent implements OnInit {
     this.changeRoute("cart/" + this.user.username);
   }
 
+  goToAccountSettings(): void {
+
+  }
+
+  goTo(menu: string): void {
+    if(menu === "Logout") {
+      this.logout();
+    }
+    else if( menu === "Account Settings") {
+      this.goToAccountSettings();
+    }
+  }
+
+  logout(): void {
+    this.catalog = undefined;
+    this.cart = undefined;
+    this.user = undefined;
+    this.userService.resetUser();
+    this.itemService.resetUser();
+    this.catalog = this.itemService.catalog;
+    this.cart = this.itemService.cart;
+    this.changeRoute("login");
+  }
+
   changeRoute(path: string) {
     this.router.navigateByUrl(path);
   }

@@ -87,6 +87,10 @@ export class UserService {
     );
   }
 
+  resetUser() {
+    this.activeUser = undefined;
+  }
+
   log(message: string): void {
     this.messageService.add("UserService: " + message);
   }
