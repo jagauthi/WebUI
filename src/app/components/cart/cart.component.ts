@@ -30,13 +30,14 @@ export class CartComponent implements OnInit {
   ngOnInit() { 
     this.user = this.userService.activeUser;
     this.cart = this.itemService.cart;
-    this.cart.sort(this.cartSort);
     if(this.user.username === "") {
+      this.logout();
       this.changeRoute("login");
     }
     if(this.cart === undefined) {
       this.getCart(this.user.username);
     }
+    this.cart.sort(this.cartSort);
   } 
 
   cartSort(item1: CartItem, item2: CartItem): number { 
@@ -116,7 +117,7 @@ export class CartComponent implements OnInit {
   }
 
   getImgPath(item: Item): string {
-    return "assets/" + item.description + ".jpg";
+    return "assets/" + item.description + ".png";
   }
 
   getTotalPrice(): number {
@@ -127,11 +128,23 @@ export class CartComponent implements OnInit {
     return totalPrice;
   }
 
+  goToCheckout(): void {
+    this.changeRoute("/checkout");
+  }
+
   goBack(): void {
     this.location.back();
   }
 
   changeRoute(path: string) {
     this.router.navigateByUrl(path);
+  }
+
+  logout(): void {
+    this.cart = undefined;
+    this.user = undefined;
+    this.userService.resetUser();
+    this.itemService.resetUser();
+    this.changeRoute("login");
   }
 }

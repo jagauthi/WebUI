@@ -1,10 +1,10 @@
 
 <div>
   <div class="intro">
-    <select class="account" (change)="goTo($event.target.value)" name="Filter">
+    <select class="dropdown" (change)="goTo($event.target.value)" name="Filter">
       <option>Account settings</option>
       <option>Logout</option>
-    </select>  
+    </select>   
     <button class="cart" (click)="goToCart()">Cart ({{cart.length}})</button>
     <h1 class="pageTitle">{{user.username}}'s Dashboard</h1>
     <h3>Item Catalog:</h3>

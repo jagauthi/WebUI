@@ -15,10 +15,6 @@ th {
     font-size:24px;
 }
 
-td img {
-    border: 1px solid rgb(0, 0, 0)
-}
-
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }

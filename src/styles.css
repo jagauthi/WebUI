@@ -36,3 +36,21 @@ button:active {
     width:90%;
     margin:auto;
 }
+
+select {
+    background-color: #3CBC8D;
+    color: white;
+    padding:20px;
+    width:20%;
+    font-size:20px;
+    border:solid black;
+  }
+  
+  select.filter option {
+    background: rgb(27, 75, 57); 
+    color: #fff; 
+  } 
+  
+  .dropdown {
+    background: #a74fff;
+  }

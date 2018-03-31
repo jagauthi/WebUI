@@ -26,8 +26,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.user = this.userService.activeUser;
     this.catalog = this.itemService.catalog;
-    this.cart = this.itemService.cart;
     if(this.user.username === "") {
+      this.logout();
       this.changeRoute("login");
     }
     if(this.catalog === undefined) {
@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit {
     if(this.cart === undefined) {
       this.getCart(this.user.username);
     }
+    this.cart = this.itemService.cart;
   }
  
   getItems(): void {
@@ -100,7 +101,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getImgPath(item: Item): string {
-    return "assets/" + item.description + ".jpg";
+    return "assets/" + item.description + ".png";
   }
 
   goToCart(): void {
@@ -126,8 +127,6 @@ export class DashboardComponent implements OnInit {
     this.user = undefined;
     this.userService.resetUser();
     this.itemService.resetUser();
-    this.catalog = this.itemService.catalog;
-    this.cart = this.itemService.cart;
     this.changeRoute("login");
   }
 

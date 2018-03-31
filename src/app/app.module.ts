@@ -14,6 +14,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CartComponent } from './components/cart/cart.component';
     MessageComponent,
     DashboardComponent,
     CreateAccountComponent,
-    CartComponent
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
